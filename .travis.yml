@@ -4,6 +4,7 @@ language: java
 jdk: oraclejdk8
 
 before_install:
+  - echo "TERM $TERM"
   - unset _JAVA_OPTIONS
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
 
