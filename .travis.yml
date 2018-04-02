@@ -1,13 +1,12 @@
 sudo: false
 
 language: java
-jdk: oraclejdk8
 
 before_install:
-  - unset _JAVA_OPTIONS
   - echo "TERM $TERM"
   - wget https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh
   - . ./install-jdk.sh -F 10 -L GPL -C
 
 install: true
+script: true
 
