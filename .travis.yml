@@ -7,42 +7,7 @@ before_install:
   - unset _JAVA_OPTIONS
   - echo "TERM $TERM"
   - wget https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh
+  - . ./install-jdk.sh -F 10 -L GPL -C
 
-jobs:
-  include:
-# vanilla
-    - stage: vanilla
-      env: TOOL='Maven'
-      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test
-    - stage: vanilla
-      env: TOOL='Gradle'
-      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
-    - stage: vanilla
-      env: TOPIC='Java Platform Module System'
-      script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
-# consumer
-    - stage: consumer
-      env: TOOL='Maven'
-      script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
-    - stage: consumer
-      env: TOOL='Gradle'
-      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew build --console plain --scan
-    - stage: consumer
-      env: TOPIC='Mockito Extension'
-      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test --console plain
-# java 9 and higher
-    - stage: java-9
-      jdk: oraclejdk9
-      env: TOOL='Maven'
-      script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
-# snapshot -- use current junit master branch
-    - stage: snapshot
-      env: TOOL='Gradle'
-      script: . ./install-jdk.sh -F 10 -L GPL -C && cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
-    - stage: snapshot
-      env: TOOL='Maven'
-      script: . ./install-jdk.sh -F 11 -L GPL -C && cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test --file pom-SNAPSHOT.xml
-# all samples, one-shot
-#    - stage: all
-#      env: TOPIC='Build all samples'
-#      script: . ./install-jdk.sh -F 10 && ./build-all-samples.jsh
+install: true
+
