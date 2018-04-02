@@ -5,6 +5,7 @@ jdk: oraclejdk8
 
 before_install:
   - unset _JAVA_OPTIONS
+  - echo "TERM $TERM"
   - wget https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh
 
 jobs:
